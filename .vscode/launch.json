@@ -1,0 +1,44 @@
+{
+    "configurations": [
+        {
+            "type": "swift",
+            "request": "launch",
+            "args": [],
+            "cwd": "${workspaceFolder:ScrutinyMonitor}",
+            "name": "Debug ScrutinyMonitor",
+            "target": "ScrutinyMonitor",
+            "configuration": "debug",
+            "preLaunchTask": "swift: Build Debug ScrutinyMonitor"
+        },
+        {
+            "type": "swift",
+            "request": "launch",
+            "args": [],
+            "cwd": "${workspaceFolder:ScrutinyMonitor}",
+            "name": "Release ScrutinyMonitor",
+            "target": "ScrutinyMonitor",
+            "configuration": "release",
+            "preLaunchTask": "swift: Build Release ScrutinyMonitor"
+        },
+        {
+            "type": "swift",
+            "request": "launch",
+            "args": [],
+            "cwd": "${workspaceFolder:ScrutinyMonitor}",
+            "name": "Debug ScrutinyMonitorWidget",
+            "target": "ScrutinyMonitorWidget",
+            "configuration": "debug",
+            "preLaunchTask": "swift: Build Debug ScrutinyMonitorWidget"
+        },
+        {
+            "type": "swift",
+            "request": "launch",
+            "args": [],
+            "cwd": "${workspaceFolder:ScrutinyMonitor}",
+            "name": "Release ScrutinyMonitorWidget",
+            "target": "ScrutinyMonitorWidget",
+            "configuration": "release",
+            "preLaunchTask": "swift: Build Release ScrutinyMonitorWidget"
+        }
+    ]
+}

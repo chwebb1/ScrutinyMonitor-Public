@@ -47,7 +47,6 @@ final class AppCoordinatorTests: XCTestCase {
         coordinator.start()
         
         XCTAssertTrue(mockCenter.delegate === coordinator)
-        XCTAssertTrue(statusBarController.store === store)
     }
     
     func testStartDoesNotRegisterDelegateIfNotAvailable() {
@@ -62,6 +61,56 @@ final class AppCoordinatorTests: XCTestCase {
         coordinator.start()
         
         XCTAssertNil(mockCenter.delegate)
+    }
+
+    func testStartInitializesStatusBarController() {
+        let coordinator = AppCoordinator(
+            store: store,
+            statusBarController: statusBarController,
+            notificationCenter: mockCenter,
+            isNotificationServiceAvailable: false
+        )
+
+        XCTAssertNil(statusBarController.store)
+        coordinator.start()
+
+        XCTAssertNotNil(statusBarController.store)
+        XCTAssertTrue(statusBarController.store === store)
+    }
+
+    func testStartInitializesStatusBarControllerEvenIfNotificationsAvailable() {
+        let coordinator = AppCoordinator(
+            store: store,
+            statusBarController: statusBarController,
+            notificationCenter: mockCenter,
+            isNotificationServiceAvailable: true
+        )
+
+        XCTAssertNil(statusBarController.store)
+        coordinator.start()
+
+        XCTAssertNotNil(statusBarController.store)
+        XCTAssertTrue(statusBarController.store === store)
+    }
+
+    func testStartIsIdempotentForStatusBarController() {
+        let coordinator = AppCoordinator(
+            store: store,
+            statusBarController: statusBarController,
+            notificationCenter: mockCenter,
+            isNotificationServiceAvailable: false
+        )
+
+        XCTAssertNil(statusBarController.store)
+        coordinator.start()
+
+        XCTAssertNotNil(statusBarController.store)
+        XCTAssertTrue(statusBarController.store === store)
+
+        // Ensure starting again doesn't cause issues
+        coordinator.start()
+
+        XCTAssertNotNil(statusBarController.store)
         XCTAssertTrue(statusBarController.store === store)
     }
 }

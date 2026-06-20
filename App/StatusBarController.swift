@@ -34,7 +34,7 @@ final class StatusBarController: NSObject, NSWindowDelegate {
         self.workspace = workspace
     }
     internal var statusItem: NSStatusItem?
-    private var defaultsObserver: NSObjectProtocol?
+    private var defaultsObserver: NotificationToken?
     internal var store: MonitorStore?
     internal var driveDetailWindowControllers: [String: NSWindowController] = [:]
 
@@ -48,15 +48,16 @@ final class StatusBarController: NSObject, NSWindowDelegate {
         guard self.store == nil else { return }
 
         self.store = store
-        defaultsObserver = NotificationCenter.default.addObserver(
+        let token = NotificationCenter.default.addObserver(
             forName: UserDefaults.didChangeNotification,
             object: UserDefaults.standard,
             queue: .main
         ) { [weak self] _ in
-            Task { @MainActor [weak self] in
+            MainActor.assumeIsolated {
                 self?.updateVisibility()
             }
         }
+        defaultsObserver = NotificationToken(token: token)
 
         updateVisibility()
         observeStatus()

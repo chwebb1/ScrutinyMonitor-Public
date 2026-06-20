@@ -142,5 +142,6 @@ private struct DriveListingCellText: View {
             .onTapGesture(count: 2) {
                 onOpenRow(row)
             }
+            .help("Double-click for details")
     }
 }

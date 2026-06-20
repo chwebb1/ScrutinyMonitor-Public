@@ -5,6 +5,7 @@ final class MonitorStoreTests: XCTestCase {
     var store: MonitorStore!
     var userDefaults: UserDefaults!
     let testSuiteName = "com.scrutinymonitor.tests.monitorstore"
+    let referenceDate = Date(timeIntervalSince1970: 0)
 
     @MainActor
     override func setUp() {
@@ -13,6 +14,7 @@ final class MonitorStoreTests: XCTestCase {
         userDefaults = UserDefaults(suiteName: testSuiteName)
         userDefaults.removePersistentDomain(forName: testSuiteName)
         userDefaults.set(SettingsSyncProvider.selectFolder.rawValue, forKey: SettingsSyncDefaults.providerKey)
+        InstallationPersistence.resetCacheForTesting()
 
         let persistence = InstallationPersistence(userDefaults: userDefaults, migratesLegacyDefaults: false)
         let cloudSync = CloudSettingsSynchronizer(defaults: userDefaults)
@@ -32,6 +34,7 @@ final class MonitorStoreTests: XCTestCase {
     override func tearDown() {
         MockURLProtocol.reset()
         userDefaults.removePersistentDomain(forName: testSuiteName)
+        InstallationPersistence.resetCacheForTesting()
         // Clean up any test keychain items by attempting to delete keys we might have created
         for installation in store.installations {
             KeychainHelper.shared.delete(service: InstallationPersistence.installationsKey, account: installation.id.uuidString)
@@ -1020,6 +1023,7 @@ final class MonitorStoreTests: XCTestCase {
         XCTAssertTrue(customStore.isRefreshing)
         XCTAssertTrue(customStore.installations[0].isRefreshing)
         XCTAssertTrue(customStore.installations[1].isRefreshing)
+        XCTAssertEqual(customStore.overallStatus, .refreshing)
 
         await responseGate.open()
 
@@ -1032,11 +1036,134 @@ final class MonitorStoreTests: XCTestCase {
         XCTAssertFalse(customStore.installations[1].isRefreshing)
     }
 
+    // To cleanly test aggregates without triggering background saves and test pollution,
+    // we bypass `store.installations` mutation (which triggers `scheduleSave()`).
+    // Instead, we inject the installations into UserDefaults and initialize a fresh store.
     @MainActor
-    func testDetermineOverallStatusPriority() throws {
-        // Initial state before any installations are added
-        XCTAssertEqual(store.overallStatus, .empty)
+    private func makeStoreWith(installations: [ScrutinyInstallation]) throws -> MonitorStore {
+        let persistence = InstallationPersistence(userDefaults: userDefaults, migratesLegacyDefaults: false)
+        let encoder = JSONEncoder()
 
+        // ScrutinyInstallation deliberately strips apiToken during encoding; keep
+        // token-bearing test setup on the normal persistence path instead.
+        let data = try encoder.encode(installations)
+        userDefaults.set(data, forKey: InstallationPersistence.installationsKey)
+        InstallationPersistence.resetCacheForTesting()
+
+        store = MonitorStore(
+            client: .shared,
+            persistence: persistence,
+            cloudSync: CloudSettingsSynchronizer(defaults: userDefaults),
+            notificationService: DriveFailureNotificationService(defaults: userDefaults)
+        )
+        return store
+    }
+
+    private func makeAggregateInstallation(name: String, host: String) -> ScrutinyInstallation {
+        ScrutinyInstallation(id: UUID(), name: name, baseURL: URL(string: "http://\(host).local")!, apiToken: Data())
+    }
+
+    @MainActor
+    func testOverallStatusEmpty() throws {
+        let store = try makeStoreWith(installations: [])
+        XCTAssertEqual(store.overviewDriveCount, 0)
+        XCTAssertFalse(store.overviewHasIssues)
+        XCTAssertEqual(store.overallStatus, .empty)
+    }
+
+    @MainActor
+    func testOverallStatusHealthy() throws {
+        let healthySnapshot = InstallationSnapshot(healthOK: true, totalDrives: 4, healthyDrives: 4, warningDrives: 0, criticalDrives: 0, devices: [], collectedAt: referenceDate)
+        var inst1 = makeAggregateInstallation(name: "NAS1", host: "nas1")
+        inst1.lastSnapshot = healthySnapshot
+
+        let store = try makeStoreWith(installations: [inst1])
+        XCTAssertEqual(store.overviewDriveCount, 4)
+        XCTAssertFalse(store.overviewHasIssues)
+        XCTAssertEqual(store.overallStatus, .healthy)
+    }
+
+    @MainActor
+    func testOverallStatusCriticalTakesPrecedenceOverWarningAndOffline() throws {
+        // healthOK means the Scrutiny API responded; drive warning/critical counts
+        // determine degraded drive-health status when the installation is online.
+        let warningSnapshot = InstallationSnapshot(healthOK: true, totalDrives: 2, healthyDrives: 1, warningDrives: 1, criticalDrives: 0, devices: [], collectedAt: referenceDate)
+        var instWarning = makeAggregateInstallation(name: "NAS2", host: "nas2")
+        instWarning.lastSnapshot = warningSnapshot
+
+        let criticalSnapshot = InstallationSnapshot(healthOK: true, totalDrives: 1, healthyDrives: 0, warningDrives: 0, criticalDrives: 1, devices: [], collectedAt: referenceDate)
+        var instCritical = makeAggregateInstallation(name: "NAS3", host: "nas3")
+        instCritical.lastSnapshot = criticalSnapshot
+
+        var instOffline = makeAggregateInstallation(name: "NAS4", host: "nas4")
+        instOffline.lastSnapshot = nil
+        instOffline.lastError = "Connection timeout"
+
+        let store = try makeStoreWith(installations: [instWarning, instCritical, instOffline])
+
+        XCTAssertEqual(store.overviewDriveCount, 3)
+        XCTAssertTrue(store.overviewHasIssues)
+        XCTAssertEqual(store.overallStatus, .critical)
+    }
+
+    @MainActor
+    func testOverallStatusWarningTakesPrecedenceOverOffline() throws {
+        let warningSnapshot = InstallationSnapshot(healthOK: true, totalDrives: 2, healthyDrives: 1, warningDrives: 1, criticalDrives: 0, devices: [], collectedAt: referenceDate)
+        var instWarning = makeAggregateInstallation(name: "NAS2", host: "nas2")
+        instWarning.lastSnapshot = warningSnapshot
+
+        var instOffline = makeAggregateInstallation(name: "NAS4", host: "nas4")
+        instOffline.lastSnapshot = nil
+        instOffline.lastError = "Connection timeout"
+
+        let store = try makeStoreWith(installations: [instWarning, instOffline])
+
+        XCTAssertEqual(store.overviewDriveCount, 2)
+        XCTAssertTrue(store.overviewHasIssues)
+        XCTAssertEqual(store.overallStatus, .warning)
+    }
+
+    @MainActor
+    func testOverallStatusOfflineWhenAllInstallationsOffline() throws {
+        var firstOffline = makeAggregateInstallation(name: "NAS1", host: "nas1")
+        firstOffline.lastSnapshot = nil
+        firstOffline.lastError = "Connection timeout"
+
+        var secondOffline = makeAggregateInstallation(name: "NAS2", host: "nas2")
+        secondOffline.lastSnapshot = nil
+        secondOffline.lastError = "Connection refused"
+
+        let store = try makeStoreWith(installations: [firstOffline, secondOffline])
+
+        XCTAssertEqual(store.overviewDriveCount, 0)
+        XCTAssertTrue(store.overviewHasIssues)
+        XCTAssertEqual(store.overallStatus, .offline)
+    }
+
+    @MainActor
+    func testOverallStatusOfflineTakesPrecedenceOverHealthy() throws {
+        let healthySnapshot = InstallationSnapshot(healthOK: true, totalDrives: 4, healthyDrives: 4, warningDrives: 0, criticalDrives: 0, devices: [], collectedAt: referenceDate)
+        var healthyInstallation = makeAggregateInstallation(name: "NAS1", host: "nas1")
+        healthyInstallation.lastSnapshot = healthySnapshot
+
+        var offlineInstallation = makeAggregateInstallation(name: "NAS2", host: "nas2")
+        offlineInstallation.lastSnapshot = nil
+        offlineInstallation.lastError = "Connection timeout"
+
+        let store = try makeStoreWith(installations: [healthyInstallation, offlineInstallation])
+
+        XCTAssertEqual(store.overviewDriveCount, 4)
+        XCTAssertTrue(store.overviewHasIssues)
+        XCTAssertEqual(store.overallStatus, .offline)
+    }
+
+    @MainActor
+    func testDetermineOverallStatusPriority_Empty() throws {
+        XCTAssertEqual(store.overallStatus, .empty)
+    }
+
+    @MainActor
+    func testDetermineOverallStatusPriority_InstallationsWithoutStatus() throws {
         try store.addInstallation(name: "NAS 1", baseURLString: "http://nas1.local", apiToken: "")
         try store.addInstallation(name: "NAS 2", baseURLString: "http://nas2.local", apiToken: "")
 
@@ -1044,29 +1171,75 @@ final class MonitorStoreTests: XCTestCase {
         // `updateAggregates` checks `hasCritical`, `hasWarning`, `hasOffline`.
         // `unknown` doesn't trigger any of those, so it falls back to `.healthy`.
         XCTAssertEqual(store.overallStatus, .healthy)
+    }
 
-        // Set refreshing
+    @MainActor
+    func testDetermineOverallStatusPriority_Refreshing() throws {
+        try store.addInstallation(name: "NAS 1", baseURLString: "http://nas1.local", apiToken: "")
+        store.installations[0].lastError = nil
         store.installations[0].isRefreshing = true
         XCTAssertEqual(store.overallStatus, .refreshing)
+    }
 
-        // Set offline
+    @MainActor
+    func testDetermineOverallStatusPriority_Offline() throws {
+        try store.addInstallation(name: "NAS 1", baseURLString: "http://nas1.local", apiToken: "")
         store.installations[0].isRefreshing = false
         store.installations[0].lastError = "Connection failed"
         XCTAssertEqual(store.overallStatus, .offline)
+    }
 
-        // Set warning
+    @MainActor
+    func testDetermineOverallStatusPriority_Warning() throws {
+        try store.addInstallation(name: "NAS 1", baseURLString: "http://nas1.local", apiToken: "")
         store.installations[0].lastError = nil
+        store.installations[0].isRefreshing = false
         store.installations[0].lastSnapshot = InstallationSnapshot(healthOK: true, totalDrives: 1, healthyDrives: 0, warningDrives: 1, criticalDrives: 0, devices: [], collectedAt: Date())
         XCTAssertEqual(store.overallStatus, .warning)
+    }
 
-        // Set critical
-        store.installations[1].lastSnapshot = InstallationSnapshot(healthOK: true, totalDrives: 1, healthyDrives: 0, warningDrives: 0, criticalDrives: 1, devices: [], collectedAt: Date())
+    @MainActor
+    func testDetermineOverallStatusPriority_Critical() throws {
+        try store.addInstallation(name: "NAS 1", baseURLString: "http://nas1.local", apiToken: "")
+        store.installations[0].lastError = nil
+        store.installations[0].isRefreshing = false
+        store.installations[0].lastSnapshot = InstallationSnapshot(healthOK: true, totalDrives: 1, healthyDrives: 0, warningDrives: 0, criticalDrives: 1, devices: [], collectedAt: Date())
         XCTAssertEqual(store.overallStatus, .critical)
+    }
 
-        // Critical should override warning, offline, and refreshing
-        store.installations[0].lastError = "Offline"
-        store.installations[0].isRefreshing = true
+    @MainActor
+    func testDetermineOverallStatusPriority_CriticalOverridesOthers() throws {
+        // Priority chain: critical > warning > offline > refreshing > healthy > empty
+        try store.addInstallation(name: "NAS 1", baseURLString: "http://nas1.local", apiToken: "")
+        try store.addInstallation(name: "NAS 2", baseURLString: "http://nas2.local", apiToken: "")
+        try store.addInstallation(name: "NAS 3", baseURLString: "http://nas3.local", apiToken: "")
+
+        store.installations[0].lastSnapshot = InstallationSnapshot(healthOK: true, totalDrives: 1, healthyDrives: 0, warningDrives: 0, criticalDrives: 1, devices: [], collectedAt: Date())
+
+        store.installations[1].lastSnapshot = InstallationSnapshot(healthOK: true, totalDrives: 1, healthyDrives: 0, warningDrives: 1, criticalDrives: 0, devices: [], collectedAt: Date())
+
+        store.installations[2].lastError = "Offline"
+        store.installations[2].isRefreshing = true
         XCTAssertEqual(store.overallStatus, .critical)
+    }
+
+    @MainActor
+    func testDetermineOverallStatusPriority_MixedStatesWithoutCritical() throws {
+        // Priority chain: critical > warning > offline > refreshing > healthy > empty
+        try store.addInstallation(name: "NAS 1", baseURLString: "http://nas1.local", apiToken: "")
+        try store.addInstallation(name: "NAS 2", baseURLString: "http://nas2.local", apiToken: "")
+        try store.addInstallation(name: "NAS 3", baseURLString: "http://nas3.local", apiToken: "")
+
+        store.installations[0].lastSnapshot = InstallationSnapshot(healthOK: true, totalDrives: 1, healthyDrives: 0, warningDrives: 1, criticalDrives: 0, devices: [], collectedAt: Date())
+
+        store.installations[1].lastError = "Offline"
+        store.installations[1].isRefreshing = false
+
+        store.installations[2].isRefreshing = true
+        store.installations[2].lastError = nil
+
+        // Warning should win over offline and refreshing
+        XCTAssertEqual(store.overallStatus, .warning)
     }
 
     @MainActor

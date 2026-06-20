@@ -132,4 +132,13 @@ struct InstallationPersistence {
             KeychainHelper.shared.delete(service: serviceKey, accounts: stringIDs)
         }
     }
+
+    #if DEBUG
+    static func resetCacheForTesting() {
+        cacheLock.lock()
+        cachedData = nil
+        cachedInstallations = nil
+        cacheLock.unlock()
+    }
+    #endif
 }
