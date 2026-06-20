@@ -1,0 +1,50 @@
+{
+  "configurations" : [
+    {
+      "id" : "F06CC37F-0CD4-4191-9CED-FBDADE17F8A9",
+      "name" : "Test Scheme Action",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "performanceAntipatternCheckerEnabled" : true,
+    "targetForVariableExpansion" : {
+      "containerPath" : "container:",
+      "identifier" : "ScrutinyMonitor",
+      "name" : "ScrutinyMonitor"
+    }
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:",
+        "identifier" : "ScrutinyMonitorTests",
+        "name" : "ScrutinyMonitorTests"
+      }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:",
+        "identifier" : "ScrutinyMonitorUITests",
+        "name" : "ScrutinyMonitorUITests"
+      }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:",
+        "identifier" : "ModelsTests",
+        "name" : "ModelsTests"
+      }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:",
+        "identifier" : "WidgetTests",
+        "name" : "WidgetTests"
+      }
+    }
+  ],
+  "version" : 1
+}

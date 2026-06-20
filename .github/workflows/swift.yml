@@ -1,0 +1,45 @@
+name: Swift
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: macos-latest
+    steps:
+    - uses: actions/checkout@v6
+    - name: Verify Xcode Version
+      run: xcodebuild -version
+    - name: Resolve Dependencies
+      run: |
+        n=0
+        until [ "$n" -ge 5 ]; do
+          swift package resolve && break
+          n=$((n+1))
+          echo "Retrying package resolution... ($n/5)"
+          sleep 5
+        done
+    - name: Build
+      run: swift build
+
+  test:
+    needs: build
+    runs-on: macos-latest
+    steps:
+    - uses: actions/checkout@v6
+    - name: Verify Xcode Version
+      run: xcodebuild -version
+    - name: Resolve Dependencies
+      run: |
+        n=0
+        until [ "$n" -ge 5 ]; do
+          swift package resolve && break
+          n=$((n+1))
+          echo "Retrying package resolution... ($n/5)"
+          sleep 5
+        done
+    - name: Run tests
+      run: swift test

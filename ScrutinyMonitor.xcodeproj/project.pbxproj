@@ -1,0 +1,815 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		110000000000000000000001 /* ScrutinyMonitorWidget.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 120000000000000000000002 /* ScrutinyMonitorWidget.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		110000000000000000000002 /* ViewInspector in Frameworks */ = {isa = PBXBuildFile; productRef = 260000000000000000000001 /* ViewInspector */; };
+		110000000000000000000003 /* ViewInspector in Frameworks */ = {isa = PBXBuildFile; productRef = 260000000000000000000001 /* ViewInspector */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		130000000000000000000001 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 140000000000000000000001 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 150000000000000000000002;
+			remoteInfo = ScrutinyMonitorWidget;
+		};
+		130000000000000000000002 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 140000000000000000000001 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 150000000000000000000001;
+			remoteInfo = ScrutinyMonitor;
+		};
+		130000000000000000000003 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 140000000000000000000001 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 150000000000000000000001;
+			remoteInfo = ScrutinyMonitor;
+		};
+		130000000000000000000004 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 140000000000000000000001 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 150000000000000000000001;
+			remoteInfo = ScrutinyMonitor;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		160000000000000000000001 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				110000000000000000000001 /* ScrutinyMonitorWidget.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		120000000000000000000001 /* ScrutinyMonitor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ScrutinyMonitor.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		120000000000000000000002 /* ScrutinyMonitorWidget.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = ScrutinyMonitorWidget.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		120000000000000000000003 /* ModelsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ModelsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		120000000000000000000004 /* ScrutinyMonitorTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ScrutinyMonitorTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		120000000000000000000005 /* ScrutinyMonitorUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ScrutinyMonitorUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		250000000000000000000001 /* Exceptions for "Widget" folder in "ScrutinyMonitorWidget" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 150000000000000000000002 /* ScrutinyMonitorWidget */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		170000000000000000000001 /* App */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = App;
+			sourceTree = "<group>";
+		};
+		170000000000000000000002 /* Models */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = Models;
+			sourceTree = "<group>";
+		};
+		170000000000000000000003 /* Services */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = Services;
+			sourceTree = "<group>";
+		};
+		170000000000000000000004 /* Stores */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = Stores;
+			sourceTree = "<group>";
+		};
+		170000000000000000000005 /* Support */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = Support;
+			sourceTree = "<group>";
+		};
+		170000000000000000000006 /* Views */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = Views;
+			sourceTree = "<group>";
+		};
+		170000000000000000000007 /* enums */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = enums;
+			sourceTree = "<group>";
+		};
+		170000000000000000000008 /* Widget */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				250000000000000000000001 /* Exceptions for "Widget" folder in "ScrutinyMonitorWidget" target */,
+			);
+			path = Widget;
+			sourceTree = "<group>";
+		};
+		170000000000000000000009 /* Tests/ModelsTests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = Tests/ModelsTests;
+			sourceTree = "<group>";
+		};
+		17000000000000000000000A /* Tests/ScrutinyMonitorTests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = Tests/ScrutinyMonitorTests;
+			sourceTree = "<group>";
+		};
+		17000000000000000000000B /* Tests/ScrutinyMonitorUITests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = Tests/ScrutinyMonitorUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXFileSystemSynchronizedRootGroup section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		180000000000000000000001 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		180000000000000000000002 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		180000000000000000000003 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		180000000000000000000004 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				110000000000000000000002 /* ViewInspector in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		180000000000000000000005 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				110000000000000000000003 /* ViewInspector in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		190000000000000000000001 = {
+			isa = PBXGroup;
+			children = (
+				170000000000000000000001 /* App */,
+				170000000000000000000002 /* Models */,
+				170000000000000000000003 /* Services */,
+				170000000000000000000004 /* Stores */,
+				170000000000000000000005 /* Support */,
+				170000000000000000000006 /* Views */,
+				170000000000000000000007 /* enums */,
+				170000000000000000000008 /* Widget */,
+				170000000000000000000009 /* Tests/ModelsTests */,
+				17000000000000000000000A /* Tests/ScrutinyMonitorTests */,
+				17000000000000000000000B /* Tests/ScrutinyMonitorUITests */,
+				190000000000000000000002 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		190000000000000000000002 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				120000000000000000000001 /* ScrutinyMonitor.app */,
+				120000000000000000000002 /* ScrutinyMonitorWidget.appex */,
+				120000000000000000000003 /* ModelsTests.xctest */,
+				120000000000000000000004 /* ScrutinyMonitorTests.xctest */,
+				120000000000000000000005 /* ScrutinyMonitorUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		150000000000000000000001 /* ScrutinyMonitor */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 200000000000000000000001 /* Build configuration list for PBXNativeTarget "ScrutinyMonitor" */;
+			buildPhases = (
+				210000000000000000000001 /* Sources */,
+				180000000000000000000001 /* Frameworks */,
+				220000000000000000000001 /* Resources */,
+				160000000000000000000001 /* Embed Foundation Extensions */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				230000000000000000000001 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				170000000000000000000001 /* App */,
+				170000000000000000000002 /* Models */,
+				170000000000000000000003 /* Services */,
+				170000000000000000000004 /* Stores */,
+				170000000000000000000005 /* Support */,
+				170000000000000000000006 /* Views */,
+				170000000000000000000007 /* enums */,
+			);
+			name = ScrutinyMonitor;
+			packageProductDependencies = (
+			);
+			productName = ScrutinyMonitor;
+			productReference = 120000000000000000000001 /* ScrutinyMonitor.app */;
+			productType = "com.apple.product-type.application";
+		};
+		150000000000000000000002 /* ScrutinyMonitorWidget */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 200000000000000000000002 /* Build configuration list for PBXNativeTarget "ScrutinyMonitorWidget" */;
+			buildPhases = (
+				210000000000000000000002 /* Sources */,
+				180000000000000000000002 /* Frameworks */,
+				220000000000000000000002 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				170000000000000000000002 /* Models */,
+				170000000000000000000003 /* Services */,
+				170000000000000000000004 /* Stores */,
+				170000000000000000000005 /* Support */,
+				170000000000000000000007 /* enums */,
+				170000000000000000000008 /* Widget */,
+			);
+			name = ScrutinyMonitorWidget;
+			packageProductDependencies = (
+			);
+			productName = ScrutinyMonitorWidget;
+			productReference = 120000000000000000000002 /* ScrutinyMonitorWidget.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
+		150000000000000000000003 /* ModelsTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 200000000000000000000004 /* Build configuration list for PBXNativeTarget "ModelsTests" */;
+			buildPhases = (
+				210000000000000000000003 /* Sources */,
+				180000000000000000000003 /* Frameworks */,
+				220000000000000000000003 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				230000000000000000000002 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				170000000000000000000009 /* Tests/ModelsTests */,
+			);
+			name = ModelsTests;
+			packageProductDependencies = (
+			);
+			productName = ModelsTests;
+			productReference = 120000000000000000000003 /* ModelsTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		150000000000000000000004 /* ScrutinyMonitorTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 200000000000000000000005 /* Build configuration list for PBXNativeTarget "ScrutinyMonitorTests" */;
+			buildPhases = (
+				210000000000000000000004 /* Sources */,
+				180000000000000000000004 /* Frameworks */,
+				220000000000000000000004 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				230000000000000000000003 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				17000000000000000000000A /* Tests/ScrutinyMonitorTests */,
+			);
+			name = ScrutinyMonitorTests;
+			packageProductDependencies = (
+				260000000000000000000001 /* ViewInspector */,
+			);
+			productName = ScrutinyMonitorTests;
+			productReference = 120000000000000000000004 /* ScrutinyMonitorTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		150000000000000000000005 /* ScrutinyMonitorUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 200000000000000000000006 /* Build configuration list for PBXNativeTarget "ScrutinyMonitorUITests" */;
+			buildPhases = (
+				210000000000000000000005 /* Sources */,
+				180000000000000000000005 /* Frameworks */,
+				220000000000000000000005 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				230000000000000000000004 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				17000000000000000000000B /* Tests/ScrutinyMonitorUITests */,
+			);
+			name = ScrutinyMonitorUITests;
+			packageProductDependencies = (
+				260000000000000000000001 /* ViewInspector */,
+			);
+			productName = ScrutinyMonitorUITests;
+			productReference = 120000000000000000000005 /* ScrutinyMonitorUITests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		140000000000000000000001 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 2650;
+				LastUpgradeCheck = 2650;
+				TargetAttributes = {
+					150000000000000000000001 = {
+						CreatedOnToolsVersion = 26.5;
+					};
+					150000000000000000000002 = {
+						CreatedOnToolsVersion = 26.5;
+					};
+					150000000000000000000003 = {
+						CreatedOnToolsVersion = 26.5;
+						TestTargetID = 150000000000000000000001;
+					};
+					150000000000000000000004 = {
+						CreatedOnToolsVersion = 26.5;
+						TestTargetID = 150000000000000000000001;
+					};
+					150000000000000000000005 = {
+						CreatedOnToolsVersion = 26.5;
+						TestTargetID = 150000000000000000000001;
+					};
+				};
+			};
+			buildConfigurationList = 200000000000000000000003 /* Build configuration list for PBXProject "ScrutinyMonitor" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 190000000000000000000001;
+			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				270000000000000000000001 /* XCRemoteSwiftPackageReference "ViewInspector" */,
+			);
+			preferredProjectObjectVersion = 77;
+			productRefGroup = 190000000000000000000002 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				150000000000000000000001 /* ScrutinyMonitor */,
+				150000000000000000000002 /* ScrutinyMonitorWidget */,
+				150000000000000000000003 /* ModelsTests */,
+				150000000000000000000004 /* ScrutinyMonitorTests */,
+				150000000000000000000005 /* ScrutinyMonitorUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		220000000000000000000001 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		220000000000000000000002 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		220000000000000000000003 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		220000000000000000000004 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		220000000000000000000005 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		210000000000000000000001 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		210000000000000000000002 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		210000000000000000000003 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		210000000000000000000004 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		210000000000000000000005 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		230000000000000000000001 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 150000000000000000000002 /* ScrutinyMonitorWidget */;
+			targetProxy = 130000000000000000000001 /* PBXContainerItemProxy */;
+		};
+		230000000000000000000002 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 150000000000000000000001 /* ScrutinyMonitor */;
+			targetProxy = 130000000000000000000002 /* PBXContainerItemProxy */;
+		};
+		230000000000000000000003 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 150000000000000000000001 /* ScrutinyMonitor */;
+			targetProxy = 130000000000000000000003 /* PBXContainerItemProxy */;
+		};
+		230000000000000000000004 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 150000000000000000000001 /* ScrutinyMonitor */;
+			targetProxy = 130000000000000000000004 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		240000000000000000000001 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = script/ScrutinyMonitorXcode.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 9JFCNHWJPE;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_TESTABILITY = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "Scrutiny Monitor";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
+				INFOPLIST_KEY_ScrutinyMonitorAppGroupIdentifier = "$(DEVELOPMENT_TEAM).group.com.chriswebb.ScrutinyMonitor";
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.chriswebb.ScrutinyMonitor;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		240000000000000000000002 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = script/ScrutinyMonitorXcode.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 9JFCNHWJPE;
+				ENABLE_HARDENED_RUNTIME = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "Scrutiny Monitor";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
+				INFOPLIST_KEY_ScrutinyMonitorAppGroupIdentifier = "$(DEVELOPMENT_TEAM).group.com.chriswebb.ScrutinyMonitor";
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.chriswebb.ScrutinyMonitor;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		240000000000000000000003 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
+				CODE_SIGN_ENTITLEMENTS = Widget/ScrutinyMonitorWidget.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 9JFCNHWJPE;
+				ENABLE_TESTABILITY = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = Widget/Info.plist;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.chriswebb.ScrutinyMonitor.Widget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		240000000000000000000004 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
+				CODE_SIGN_ENTITLEMENTS = Widget/ScrutinyMonitorWidget.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 9JFCNHWJPE;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = Widget/Info.plist;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.chriswebb.ScrutinyMonitor.Widget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		240000000000000000000005 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_VERSION = 6.0;
+			};
+			name = Debug;
+		};
+		240000000000000000000006 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 6.0;
+			};
+			name = Release;
+		};
+		240000000000000000000007 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 9JFCNHWJPE;
+				ENABLE_TESTING_SEARCH_PATHS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.chriswebb.ScrutinyMonitor.ModelsTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ScrutinyMonitor.app/Contents/MacOS/ScrutinyMonitor";
+			};
+			name = Debug;
+		};
+		240000000000000000000008 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 9JFCNHWJPE;
+				ENABLE_TESTING_SEARCH_PATHS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.chriswebb.ScrutinyMonitor.ModelsTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ScrutinyMonitor.app/Contents/MacOS/ScrutinyMonitor";
+			};
+			name = Release;
+		};
+		240000000000000000000009 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 9JFCNHWJPE;
+				ENABLE_TESTING_SEARCH_PATHS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.chriswebb.ScrutinyMonitor.ScrutinyMonitorTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ScrutinyMonitor.app/Contents/MacOS/ScrutinyMonitor";
+			};
+			name = Debug;
+		};
+		24000000000000000000000A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 9JFCNHWJPE;
+				ENABLE_TESTING_SEARCH_PATHS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.chriswebb.ScrutinyMonitor.ScrutinyMonitorTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ScrutinyMonitor.app/Contents/MacOS/ScrutinyMonitor";
+			};
+			name = Release;
+		};
+		24000000000000000000000B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 9JFCNHWJPE;
+				ENABLE_TESTING_SEARCH_PATHS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.chriswebb.ScrutinyMonitor.ScrutinyMonitorUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ScrutinyMonitor.app/Contents/MacOS/ScrutinyMonitor";
+			};
+			name = Debug;
+		};
+		24000000000000000000000C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 9JFCNHWJPE;
+				ENABLE_TESTING_SEARCH_PATHS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.chriswebb.ScrutinyMonitor.ScrutinyMonitorUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ScrutinyMonitor.app/Contents/MacOS/ScrutinyMonitor";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		200000000000000000000001 /* Build configuration list for PBXNativeTarget "ScrutinyMonitor" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				240000000000000000000001 /* Debug */,
+				240000000000000000000002 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		200000000000000000000002 /* Build configuration list for PBXNativeTarget "ScrutinyMonitorWidget" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				240000000000000000000003 /* Debug */,
+				240000000000000000000004 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		200000000000000000000003 /* Build configuration list for PBXProject "ScrutinyMonitor" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				240000000000000000000005 /* Debug */,
+				240000000000000000000006 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		200000000000000000000004 /* Build configuration list for PBXNativeTarget "ModelsTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				240000000000000000000007 /* Debug */,
+				240000000000000000000008 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		200000000000000000000005 /* Build configuration list for PBXNativeTarget "ScrutinyMonitorTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				240000000000000000000009 /* Debug */,
+				24000000000000000000000A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		200000000000000000000006 /* Build configuration list for PBXNativeTarget "ScrutinyMonitorUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				24000000000000000000000B /* Debug */,
+				24000000000000000000000C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		270000000000000000000001 /* XCRemoteSwiftPackageReference "ViewInspector" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/nalexn/ViewInspector.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.10.2;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		260000000000000000000001 /* ViewInspector */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 270000000000000000000001 /* XCRemoteSwiftPackageReference "ViewInspector" */;
+			productName = ViewInspector;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = 140000000000000000000001 /* Project object */;
+}

@@ -1,0 +1,7 @@
+.build/
+.cache/
+dist/
+.DS_Store
+Package.resolved
+*.xcuserstate
+Tests/ScrutinyMonitorUITests/__Snapshots__/*_failed.png
