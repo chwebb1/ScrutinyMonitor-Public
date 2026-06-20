@@ -28,6 +28,8 @@ jobs:
   test:
     needs: build
     runs-on: macos-latest
+    env:
+      TZ: America/New_York
     steps:
     - uses: actions/checkout@v6
     - name: Verify Xcode Version

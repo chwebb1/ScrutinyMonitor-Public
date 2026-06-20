@@ -5,7 +5,6 @@ import PackageDescription
 
 let packageDirectory = URL(fileURLWithPath: #filePath).deletingLastPathComponent().path
 let executableExcludes = [
-    ".codex",
     ".git",
     "Benchmark.swift",
     "benchmark_keychain.swift",
