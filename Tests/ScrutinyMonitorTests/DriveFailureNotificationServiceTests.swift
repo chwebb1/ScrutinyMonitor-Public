@@ -12,7 +12,7 @@ final class MockNotificationSettings: NotificationSettingsProtocol {
 }
 
 @MainActor
-final class MockNotificationCenter: @MainActor NotificationCenterProtocol {
+final class MockNotificationCenter: NotificationCenterProtocol {
     var delegate: UNUserNotificationCenterDelegate?
     var addedRequests = [UNNotificationRequest]()
     var authorizationStatus: UNAuthorizationStatus = .authorized

@@ -35,7 +35,7 @@ final class DriveDetailViewTests: XCTestCase {
             throw ScrutinyClientError.api("Test error message")
         }
         
-        var view = DriveDetailView(installation: installation, drive: drive, client: mockClient)
+        let view = DriveDetailView(installation: installation, drive: drive, client: mockClient)
 
         let exp = view.inspection.inspect(after: 0.5) { view in
             let unavailableView = try view.inspect().find(ViewType.ContentUnavailableView.self)
